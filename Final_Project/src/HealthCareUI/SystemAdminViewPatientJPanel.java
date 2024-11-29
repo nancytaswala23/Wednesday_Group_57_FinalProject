@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author pavan
+ * @author pranav
  */
 public class SystemAdminViewPatientJPanel extends javax.swing.JPanel {
 

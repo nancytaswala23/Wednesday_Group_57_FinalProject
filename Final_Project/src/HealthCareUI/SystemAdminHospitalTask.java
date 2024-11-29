@@ -6,7 +6,7 @@ package HealthCareUI;
 
 /**
  *
- * @author pavan
+ * @author pranav
  */
 public class SystemAdminHospitalTask extends javax.swing.JFrame {
 

@@ -14,7 +14,7 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author pavan
+ * @author pranav
  */
 public class SystemAdminSearchHospitalJPanel extends javax.swing.JPanel {
 private TableRowSorter<TableModel> sorter; 
