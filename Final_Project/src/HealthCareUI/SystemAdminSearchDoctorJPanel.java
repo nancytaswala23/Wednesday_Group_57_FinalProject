@@ -13,7 +13,7 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author pavan
+ * @author pranav
  */
 public class SystemAdminSearchDoctorJPanel extends javax.swing.JPanel {
 

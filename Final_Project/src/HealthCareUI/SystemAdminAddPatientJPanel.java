@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author pavan
+ * @author pranav
  */
 public class SystemAdminAddPatientJPanel extends javax.swing.JPanel {
 

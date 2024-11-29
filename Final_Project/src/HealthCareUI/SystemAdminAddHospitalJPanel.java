@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author pavan
+ * @author pranav
  */
 public class SystemAdminAddHospitalJPanel extends javax.swing.JPanel {
 
