@@ -8,7 +8,7 @@ import HealthCare.Hospital;
 
 /**
  *
- * @author taswa
+ * @author rajes
  */
 public class HospitalTask extends javax.swing.JFrame {
 private Hospital h;

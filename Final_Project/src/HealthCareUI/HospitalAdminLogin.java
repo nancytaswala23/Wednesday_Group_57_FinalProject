@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author taswa
+ * @author rajes
  */
 public class HospitalAdminLogin extends javax.swing.JFrame {
 private Hospital h;

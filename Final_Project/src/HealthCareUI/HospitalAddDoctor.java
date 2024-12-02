@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author taswa
+ * @author rajes
  */
 public class HospitalAddDoctor extends javax.swing.JPanel {
 
