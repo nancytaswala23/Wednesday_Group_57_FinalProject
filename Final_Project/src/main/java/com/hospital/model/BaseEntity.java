@@ -1,11 +1,12 @@
 package com.hospital.model;
 
 public class BaseEntity {
-    protected int id;
-    protected String name;
-    protected String username;
-    protected String role;
-    protected int hospitalId;
+    private int id;
+    private String name;
+    private String username;
+    private String email;
+    private String role;
+    private int hospitalId;
 
     public BaseEntity(int id, String name, String username, String role, int hospitalId) {
         this.id = id;
@@ -19,32 +20,44 @@ public class BaseEntity {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public int getHospitalId() {
-        return hospitalId;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getHospitalId() {
+        return hospitalId;
     }
 
     public void setHospitalId(int hospitalId) {

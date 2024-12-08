@@ -477,6 +477,10 @@ public class DataStore {
         suppliers.remove(id);
     }
 
+    public List<Appointment> getAllAppointments() {
+        return new ArrayList<>(appointments.values());
+    }
+
     // IT Support ticket methods
     public void addTicket(ITSupportTicket ticket) {
         tickets.put(ticket.getId(), ticket);
@@ -730,9 +734,5 @@ public class DataStore {
 
     public List<Department> getAllDepartments() {
         return new ArrayList<>(departments.values());
-    }
-
-    public List<Appointment> getAllAppointments() {
-        return new ArrayList<>(appointments.values());
     }
 } 

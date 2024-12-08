@@ -205,7 +205,7 @@ public class ReceptionistDashboard extends BaseDashboard {
             appointmentTableModel.addRow(new Object[]{
                 patient != null ? patient.getName() : "Unknown",
                 doctor != null ? doctor.getName() : "Unknown",
-                appointment.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                appointment.getAppointmentTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                 appointment.getPurpose(),
                 appointment.getStatus()
             });

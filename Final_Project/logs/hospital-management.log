@@ -74,25 +74,11 @@
 2024-12-08 15:46:13.310 [main] INFO  com.hospital.data.DataManager - Adding dietician: Sarah Johnson
 2024-12-08 15:46:13.310 [main] INFO  com.hospital.data.DataManager - Adding hospital: City General Hospital
 2024-12-08 15:46:20.048 [AWT-EventQueue-0] INFO  com.hospital.security.AuthService - Attempting login for user: doctor
-2024-12-08 15:48:08.975 [main] INFO  com.hospital.data.DataManager - Adding doctor: Dr. John Smith
-2024-12-08 15:48:08.977 [main] INFO  com.hospital.data.DataManager - Adding patient: Jane Doe with ID: 2 to patients map
-2024-12-08 15:48:08.977 [main] INFO  com.hospital.data.DataManager - Adding patient: Jane Doe with ID: 2 to users map
-2024-12-08 15:48:08.977 [main] INFO  com.hospital.data.DataManager - Successfully added patient to both maps
-2024-12-08 15:48:08.977 [main] INFO  com.hospital.data.DataManager - Adding pharmacist: Bob Wilson
-2024-12-08 15:48:08.977 [main] INFO  com.hospital.data.DataManager - Adding IT support: Mike Brown
-2024-12-08 15:48:08.977 [main] INFO  com.hospital.data.DataManager - Adding dietician: Sarah Johnson
-2024-12-08 15:48:08.978 [main] INFO  com.hospital.data.DataManager - Adding hospital: City General Hospital
-2024-12-08 15:50:33.185 [main] INFO  com.hospital.data.DataManager - Adding doctor: Dr. John Smith
-2024-12-08 15:50:33.187 [main] INFO  com.hospital.data.DataManager - Adding patient: Jane Doe with ID: 2 to patients map
-2024-12-08 15:50:33.187 [main] INFO  com.hospital.data.DataManager - Adding patient: Jane Doe with ID: 2 to users map
-2024-12-08 15:50:33.187 [main] INFO  com.hospital.data.DataManager - Successfully added patient to both maps
-2024-12-08 15:50:33.187 [main] INFO  com.hospital.data.DataManager - Adding pharmacist: Bob Wilson
-2024-12-08 15:50:33.187 [main] INFO  com.hospital.data.DataManager - Adding IT support: Mike Brown
-2024-12-08 15:50:33.187 [main] INFO  com.hospital.data.DataManager - Adding dietician: Sarah Johnson
-2024-12-08 15:50:33.187 [main] INFO  com.hospital.data.DataManager - Adding hospital: City General Hospital
-2024-12-08 15:50:42.764 [AWT-EventQueue-0] INFO  com.hospital.security.AuthService - Attempting login for user: reception
-2024-12-08 15:54:12.299 [AWT-EventQueue-0] INFO  com.hospital.views.BaseDashboard - User reception logged out
-2024-12-08 15:54:19.098 [AWT-EventQueue-0] INFO  com.hospital.security.AuthService - Attempting login for user: doctor
-2024-12-08 15:59:46.048 [AWT-EventQueue-0] INFO  com.hospital.security.AuthService - Attempting login for user: doctor
-2024-12-08 15:59:46.056 [AWT-EventQueue-0] WARN  com.hospital.security.AuthService - Invalid password attempt for user: doctor
-2024-12-08 16:04:08.777 [AWT-EventQueue-0] INFO  com.hospital.security.AuthService - Attempting login for user: doctor
+2024-12-08 17:23:57.725 [main] INFO  com.hospital.data.DataManager - Adding doctor: Dr. John Smith
+2024-12-08 17:23:57.727 [main] INFO  com.hospital.data.DataManager - Adding patient: Jane Doe with ID: 2 to patients map
+2024-12-08 17:23:57.727 [main] INFO  com.hospital.data.DataManager - Adding patient: Jane Doe with ID: 2 to users map
+2024-12-08 17:23:57.727 [main] INFO  com.hospital.data.DataManager - Successfully added patient to both maps
+2024-12-08 17:23:57.727 [main] INFO  com.hospital.data.DataManager - Adding pharmacist: Bob Wilson
+2024-12-08 17:23:57.727 [main] INFO  com.hospital.data.DataManager - Adding IT support: Mike Brown
+2024-12-08 17:23:57.727 [main] INFO  com.hospital.data.DataManager - Adding dietician: Sarah Johnson
+2024-12-08 17:23:57.728 [main] INFO  com.hospital.data.DataManager - Adding hospital: City General Hospital
