@@ -25,6 +25,11 @@ public class DataStore {
     private List<CommunityManager> communityManagers;
     private List<CommunityHealthMetric> healthMetrics;
     private List<VaccinationDrive> vaccinationDrives;
+    private Map<Integer, Receptionist> receptionists;
+    private Map<Integer, StaffManager> staffManagers;
+    private Map<Integer, VisitorLog> visitorLogs = new HashMap<>();
+    private Map<Integer, StaffSchedule> staffSchedules = new HashMap<>();
+    private Map<Integer, Department> departments = new HashMap<>();
 
     public static synchronized DataStore getInstance() {
         if (instance == null) {
@@ -50,6 +55,8 @@ public class DataStore {
         communityManagers = new ArrayList<>();
         healthMetrics = new ArrayList<>();
         vaccinationDrives = new ArrayList<>();
+        receptionists = new HashMap<>();
+        staffManagers = new HashMap<>();
         initializeDummyData();
     }
 
@@ -97,6 +104,55 @@ public class DataStore {
         CommunityManager communityManager = new CommunityManager(getNextId(), "John Community", "community", 1, "North Region", "555-0123", 50000);
         users.put(communityManager.getId(), communityManager);
         communityManagers.add(communityManager);
+
+        // Add departments
+        Department hrDept = new Department(getNextId(), "Human Resources", "HR Department", 25);
+        Department nursingDept = new Department(getNextId(), "Nursing", "Nursing Department", 50);
+        Department opsDept = new Department(getNextId(), "Operations", "Operations Department", 35);
+        departments.put(hrDept.getId(), hrDept);
+        departments.put(nursingDept.getId(), nursingDept);
+        departments.put(opsDept.getId(), opsDept);
+
+        // Add dummy receptionists
+        Receptionist receptionist1 = new Receptionist(getNextId(), "Rachel Front", "reception", 1, "Morning", "555-0124", "Front Desk A");
+        users.put(receptionist1.getId(), receptionist1);
+        receptionists.put(receptionist1.getId(), receptionist1);
+
+        Receptionist receptionist2 = new Receptionist(getNextId(), "Maria Garcia", "reception2", 1, "Evening", "555-0125", "Front Desk B");
+        users.put(receptionist2.getId(), receptionist2);
+        receptionists.put(receptionist2.getId(), receptionist2);
+
+        Receptionist receptionist3 = new Receptionist(getNextId(), "James Wilson", "reception3", 1, "Night", "555-0126", "Emergency Desk");
+        users.put(receptionist3.getId(), receptionist3);
+        receptionists.put(receptionist3.getId(), receptionist3);
+
+        // Add visitor logs
+        addVisitorLog(new VisitorLog(getNextId(), "John Visitor", "Patient Visit", LocalDateTime.now(), "Front Desk A", receptionist1.getId()));
+        addVisitorLog(new VisitorLog(getNextId(), "Mary Smith", "Lab Test", LocalDateTime.now().minusHours(2), "Front Desk B", receptionist2.getId()));
+        addVisitorLog(new VisitorLog(getNextId(), "Robert Brown", "Emergency", LocalDateTime.now().minusHours(4), "Emergency Desk", receptionist3.getId()));
+        addVisitorLog(new VisitorLog(getNextId(), "Sarah Wilson", "Patient Visit", LocalDateTime.now().minusHours(1), "Front Desk A", receptionist1.getId()));
+        addVisitorLog(new VisitorLog(getNextId(), "Michael Lee", "Appointment", LocalDateTime.now().minusHours(3), "Front Desk B", receptionist2.getId()));
+
+        // Add dummy staff managers
+        StaffManager staffManager1 = new StaffManager(getNextId(), "Steve Manager", "staffmgr", 1, "Human Resources", "555-0127", 25);
+        users.put(staffManager1.getId(), staffManager1);
+        staffManagers.put(staffManager1.getId(), staffManager1);
+
+        StaffManager staffManager2 = new StaffManager(getNextId(), "Linda Carter", "staffmgr2", 1, "Nursing Department", "555-0128", 50);
+        users.put(staffManager2.getId(), staffManager2);
+        staffManagers.put(staffManager2.getId(), staffManager2);
+
+        StaffManager staffManager3 = new StaffManager(getNextId(), "Robert Chen", "staffmgr3", 1, "Operations", "555-0129", 35);
+        users.put(staffManager3.getId(), staffManager3);
+        staffManagers.put(staffManager3.getId(), staffManager3);
+
+        // Add staff schedules
+        addStaffSchedule(new StaffSchedule(getNextId(), staffManager1.getId(), hrDept.getId(), "Monday", "9:00 AM", "5:00 PM", "Regular Shift"));
+        addStaffSchedule(new StaffSchedule(getNextId(), staffManager1.getId(), hrDept.getId(), "Tuesday", "9:00 AM", "5:00 PM", "Training Day"));
+        addStaffSchedule(new StaffSchedule(getNextId(), staffManager2.getId(), nursingDept.getId(), "Monday", "7:00 AM", "3:00 PM", "Morning Shift"));
+        addStaffSchedule(new StaffSchedule(getNextId(), staffManager2.getId(), nursingDept.getId(), "Tuesday", "3:00 PM", "11:00 PM", "Evening Shift"));
+        addStaffSchedule(new StaffSchedule(getNextId(), staffManager3.getId(), opsDept.getId(), "Monday", "8:00 AM", "4:00 PM", "Regular Shift"));
+        addStaffSchedule(new StaffSchedule(getNextId(), staffManager3.getId(), opsDept.getId(), "Wednesday", "8:00 AM", "4:00 PM", "Maintenance Day"));
 
         // Add dummy appointments
         Appointment appointment1 = new Appointment(1, patientUser.getId(), doctor.getId(), LocalDateTime.now().plusDays(1), "Checkup", 
@@ -191,6 +247,11 @@ public class DataStore {
         communityManagers.clear();
         healthMetrics.clear();
         vaccinationDrives.clear();
+        receptionists.clear();
+        staffManagers.clear();
+        visitorLogs.clear();
+        staffSchedules.clear();
+        departments.clear();
         nextId = 1;
     }
 
@@ -235,8 +296,23 @@ public class DataStore {
         return new ArrayList<>(patients.values());
     }
 
+    public List<Patient> getPatientsByDoctor(int doctorId) {
+        // Get all patient IDs from appointments with this doctor
+        Set<Integer> patientIds = appointments.values().stream()
+            .filter(a -> a.getDoctorId() == doctorId)
+            .map(Appointment::getPatientId)
+            .collect(Collectors.toSet());
+        
+        // Return all patients with those IDs
+        return patients.values().stream()
+            .filter(p -> patientIds.contains(p.getId()))
+            .collect(Collectors.toList());
+    }
+
     public void updatePatient(Patient patient) {
-        patients.put(patient.getId(), patient);
+        if (patients.containsKey(patient.getId())) {
+            patients.put(patient.getId(), patient);
+        }
     }
 
     public void deletePatient(int id) {
@@ -273,10 +349,27 @@ public class DataStore {
         return medicalRecords.get(id);
     }
 
-    public List<MedicalRecord> getMedicalRecordsForPatient(int patientId) {
+    public List<MedicalRecord> getMedicalRecordsByPatient(int patientId) {
         return medicalRecords.values().stream()
-                .filter(record -> record.getPatientId() == patientId)
-                .collect(Collectors.toList());
+            .filter(r -> r.getPatientId() == patientId)
+            .sorted((r1, r2) -> r2.getDate().compareTo(r1.getDate()))  // Sort by date descending
+            .collect(Collectors.toList());
+    }
+
+    public List<MedicalRecord> getMedicalRecordsByDoctor(int doctorId) {
+        return medicalRecords.values().stream()
+            .filter(r -> r.getDoctorId() == doctorId)
+            .collect(Collectors.toList());
+    }
+
+    public void updateMedicalRecord(MedicalRecord record) {
+        if (medicalRecords.containsKey(record.getId())) {
+            medicalRecords.put(record.getId(), record);
+        }
+    }
+
+    public void deleteMedicalRecord(int id) {
+        medicalRecords.remove(id);
     }
 
     // Diet plan methods
@@ -538,5 +631,108 @@ public class DataStore {
 
     public void updateAppointment(Appointment appointment) {
         appointments.put(appointment.getId(), appointment);
+    }
+
+    // Receptionist methods
+    public void addReceptionist(Receptionist receptionist) {
+        receptionists.put(receptionist.getId(), receptionist);
+        users.put(receptionist.getId(), receptionist);
+    }
+
+    public Receptionist getReceptionist(int id) {
+        return receptionists.get(id);
+    }
+
+    public List<Receptionist> getAllReceptionists() {
+        return new ArrayList<>(receptionists.values());
+    }
+
+    public void updateReceptionist(Receptionist receptionist) {
+        receptionists.put(receptionist.getId(), receptionist);
+        users.put(receptionist.getId(), receptionist);
+    }
+
+    public void deleteReceptionist(int id) {
+        receptionists.remove(id);
+        users.remove(id);
+    }
+
+    // Staff Manager methods
+    public void addStaffManager(StaffManager manager) {
+        staffManagers.put(manager.getId(), manager);
+        users.put(manager.getId(), manager);
+    }
+
+    public StaffManager getStaffManager(int id) {
+        return staffManagers.get(id);
+    }
+
+    public List<StaffManager> getAllStaffManagers() {
+        return new ArrayList<>(staffManagers.values());
+    }
+
+    public void updateStaffManager(StaffManager manager) {
+        staffManagers.put(manager.getId(), manager);
+        users.put(manager.getId(), manager);
+    }
+
+    public void deleteStaffManager(int id) {
+        staffManagers.remove(id);
+        users.remove(id);
+    }
+
+    // Visitor Log methods
+    public void addVisitorLog(VisitorLog log) {
+        visitorLogs.put(log.getId(), log);
+    }
+
+    public VisitorLog getVisitorLog(int id) {
+        return visitorLogs.get(id);
+    }
+
+    public List<VisitorLog> getVisitorLogsByReceptionist(int receptionistId) {
+        return visitorLogs.values().stream()
+                .filter(log -> log.getReceptionistId() == receptionistId)
+                .collect(Collectors.toList());
+    }
+
+    public List<VisitorLog> getAllVisitorLogs() {
+        return new ArrayList<>(visitorLogs.values());
+    }
+
+    // Staff Schedule methods
+    public void addStaffSchedule(StaffSchedule schedule) {
+        staffSchedules.put(schedule.getId(), schedule);
+    }
+
+    public StaffSchedule getStaffSchedule(int id) {
+        return staffSchedules.get(id);
+    }
+
+    public List<StaffSchedule> getStaffSchedulesByManager(int managerId) {
+        return staffSchedules.values().stream()
+                .filter(schedule -> schedule.getManagerId() == managerId)
+                .collect(Collectors.toList());
+    }
+
+    public List<StaffSchedule> getAllStaffSchedules() {
+        return new ArrayList<>(staffSchedules.values());
+    }
+
+    // Department methods
+    public void addDepartment(Department department) {
+        departments.put(department.getId(), department);
+    }
+
+    public Department getDepartment(int id) {
+        return departments.get(id);
+    }
+
+    public List<Department> getAllDepartments() {
+        return new ArrayList<>(departments.values());
+    }
+
+    public List<Appointment> getAllAppointments() {
+        return new ArrayList<>(appointments.values());
     }
 } 
