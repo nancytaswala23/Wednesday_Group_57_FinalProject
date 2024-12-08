@@ -3,7 +3,6 @@ package com.hospital.model;
 public class Dietician extends BaseEntity {
     private String specialization;
     private String licenseNumber;
-    private String contactNumber;
 
     public Dietician(int id, String name, String username, int hospitalId, String specialization, String licenseNumber) {
         super(id, name, username, "DIETICIAN", hospitalId);
@@ -25,17 +24,5 @@ public class Dietician extends BaseEntity {
 
     public void setLicenseNumber(String licenseNumber) {
         this.licenseNumber = licenseNumber;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public int getDieticianId() {
-        return getId();
     }
 } 

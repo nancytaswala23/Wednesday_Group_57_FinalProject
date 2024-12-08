@@ -307,16 +307,33 @@ public class DoctorDashboard extends BaseDashboard {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        addDetailField(detailsPanel, "Name", patient.getName(), gbc);
-        addDetailField(detailsPanel, "Age", String.valueOf(patient.getAge()), gbc);
-        addDetailField(detailsPanel, "Gender", patient.getGender(), gbc);
-        addDetailField(detailsPanel, "Phone", patient.getPhone(), gbc);
-        addDetailField(detailsPanel, "Email", patient.getEmail(), gbc);
-        addDetailField(detailsPanel, "Address", patient.getAddress(), gbc);
-        addDetailField(detailsPanel, "Blood Group", patient.getBloodGroup(), gbc);
-        addDetailField(detailsPanel, "Allergies", patient.getAllergies(), gbc);
-        addDetailField(detailsPanel, "Emergency Contact", patient.getEmergencyContact(), gbc);
-        addDetailField(detailsPanel, "Last Visit", patient.getLastVisit().toString(), gbc);
+        // Add patient details
+        addDetailField(detailsPanel, "ID:", String.valueOf(patient.getId()), gbc);
+        addDetailField(detailsPanel, "Name:", patient.getName(), gbc);
+        addDetailField(detailsPanel, "Age:", String.valueOf(patient.getAge()), gbc);
+        addDetailField(detailsPanel, "Gender:", patient.getGender(), gbc);
+        addDetailField(detailsPanel, "Phone:", patient.getPhone(), gbc);
+        addDetailField(detailsPanel, "Email:", patient.getEmail(), gbc);
+        addDetailField(detailsPanel, "Blood Group:", patient.getBloodGroup(), gbc);
+        addDetailField(detailsPanel, "Allergies:", patient.getAllergies(), gbc);
+
+        // Add medical history
+        List<MedicalRecord> records = dataStore.getMedicalRecordsByPatient(patientId);
+        if (!records.isEmpty()) {
+            gbc.gridy++;
+            gbc.gridwidth = 2;
+            detailsPanel.add(new JLabel("Medical History:"), gbc);
+            
+            JTextArea historyArea = new JTextArea(10, 40);
+            historyArea.setEditable(false);
+            for (MedicalRecord record : records) {
+                historyArea.append(String.format("Date: %s\nType: %s\nDescription: %s\n\n",
+                    record.getDate(), record.getType(), record.getDescription()));
+            }
+            
+            gbc.gridy++;
+            detailsPanel.add(new JScrollPane(historyArea), gbc);
+        }
 
         JButton closeButton = new JButton("Close");
         closeButton.addActionListener(e -> dialog.dispose());
@@ -326,8 +343,7 @@ public class DoctorDashboard extends BaseDashboard {
 
         dialog.add(new JScrollPane(detailsPanel), BorderLayout.CENTER);
         dialog.add(buttonPanel, BorderLayout.SOUTH);
-
-        dialog.setSize(400, 500);
+        dialog.pack();
         dialog.setLocationRelativeTo(this);
         dialog.setVisible(true);
     }
@@ -959,11 +975,10 @@ public class DoctorDashboard extends BaseDashboard {
     }
 
     private void addDetailField(JPanel panel, String label, String value, GridBagConstraints gbc) {
-        gbc.gridx = 0;
-        gbc.gridwidth = 1;
-        panel.add(new JLabel(label + ":"), gbc);
+        panel.add(new JLabel(label), gbc);
         gbc.gridx = 1;
         panel.add(new JLabel(value != null ? value : "N/A"), gbc);
+        gbc.gridx = 0;
         gbc.gridy++;
     }
 
