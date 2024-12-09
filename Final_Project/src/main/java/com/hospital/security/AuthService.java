@@ -32,4 +32,8 @@ public class AuthService {
         // TODO: Implement proper logout
         logger.info("User logged out");
     }
+
+    public void registerUser(String username, String password) {
+        // Implementation to store username and password securely
+    }
 } 

@@ -35,6 +35,7 @@ public class Appointment {
     public int getPatientId() { return patientId; }
     public int getDoctorId() { return doctorId; }
     public LocalDateTime getDateTime() { return dateTime; }
+    public LocalDateTime getAppointmentTime() { return dateTime; }
     public String getPurpose() { return purpose; }
     public String getStatus() { return status; }
     public String getNotes() { return notes; }

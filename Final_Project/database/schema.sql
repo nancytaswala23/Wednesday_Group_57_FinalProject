@@ -41,6 +41,32 @@ CREATE TABLE patients (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+CREATE TABLE receptionists (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    hospital_id INT,
+    name VARCHAR(100) NOT NULL,
+    shift VARCHAR(20),
+    contact_number VARCHAR(20),
+    desk VARCHAR(50),
+    available BOOLEAN DEFAULT true,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (hospital_id) REFERENCES hospitals(id)
+);
+
+CREATE TABLE staff_managers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    hospital_id INT,
+    name VARCHAR(100) NOT NULL,
+    department VARCHAR(100),
+    contact_number VARCHAR(20),
+    team_size INT,
+    available BOOLEAN DEFAULT true,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (hospital_id) REFERENCES hospitals(id)
+);
+
 CREATE TABLE appointments (
     id INT PRIMARY KEY AUTO_INCREMENT,
     doctor_id INT,
