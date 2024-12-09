@@ -174,3 +174,11 @@
 2024-12-08 23:22:58.266 [main] INFO  com.hospital.data.DataManager - Adding IT support: Mike Brown
 2024-12-08 23:22:58.267 [main] INFO  com.hospital.data.DataManager - Adding dietician: Sarah Johnson
 2024-12-08 23:22:58.267 [main] INFO  com.hospital.data.DataManager - Adding hospital: City General Hospital
+2024-12-08 23:35:40.351 [main] INFO  com.hospital.data.DataManager - Adding doctor: Dr. John Smith
+2024-12-08 23:35:40.353 [main] INFO  com.hospital.data.DataManager - Adding patient: Jane Doe with ID: 2 to patients map
+2024-12-08 23:35:40.353 [main] INFO  com.hospital.data.DataManager - Adding patient: Jane Doe with ID: 2 to users map
+2024-12-08 23:35:40.353 [main] INFO  com.hospital.data.DataManager - Successfully added patient to both maps
+2024-12-08 23:35:40.354 [main] INFO  com.hospital.data.DataManager - Adding pharmacist: Bob Wilson
+2024-12-08 23:35:40.354 [main] INFO  com.hospital.data.DataManager - Adding IT support: Mike Brown
+2024-12-08 23:35:40.354 [main] INFO  com.hospital.data.DataManager - Adding dietician: Sarah Johnson
+2024-12-08 23:35:40.355 [main] INFO  com.hospital.data.DataManager - Adding hospital: City General Hospital
