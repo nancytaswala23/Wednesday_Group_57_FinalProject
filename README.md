@@ -16,20 +16,10 @@ The system comes with pre-initialized user accounts for testing purposes:
 
 ### Important Notes:
 1. For development and testing purposes:
-   - Any password can be used for login
    - Authentication is simplified for testing
    - User sessions are not persisted
 
-2. Security Considerations:
-   - This is a development setup only
-   - In production, implement:
-     - Secure password hashing
-     - Password complexity requirements
-     - Session management
-     - Rate limiting
-     - Two-factor authentication (2FA) for admin accounts
-
-3. Role Permissions:
+2. Role Permissions:
    - ADMIN: Full system access
    - DOCTOR: Patient management, appointments, prescriptions
    - PATIENT: View appointments, medical records, prescriptions
@@ -39,3 +29,23 @@ The system comes with pre-initialized user accounts for testing purposes:
    - COMMUNITY_MANAGER: Community health metrics, vaccination drives
    - RECEPTIONIST: Manage appointments, visitor check-ins, front desk operations
    - STAFF_MANAGER: Manage staff schedules, departments, and team coordination
+
+### How to Install:
+
+### Step 1: Get the Project
+1. Open Terminal/Command Prompt
+2. Navigate to your desired location
+3. Clone the repository:
+
+### Step 2: Open in IDE
+1. Open in Any IDE
+2. Click `File` → `Open Project`
+3. Navigate to the cloned project folder
+4. Select `Final_Project` folder
+5. Click `Open Project`
+
+### Step 3: Run the Project
+1. In IDE Project Explorer, right-click on `Final_Project`
+2. Select `Clean and Build` (wait for build to complete)
+3. Click `Run Project` (green play button) or press `F6`
+
